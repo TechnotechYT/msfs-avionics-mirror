@@ -8,7 +8,7 @@ import { LodBoundary, LodBoundaryCache } from '../../navigation';
 import { Subject } from '../../sub/Subject';
 import { Subscribable } from '../../sub/Subscribable';
 import { MutableSubscribableSet, SubscribableSet } from '../../sub/SubscribableSet';
-import { Tcas, TcasIntruder } from '../../traffic/Tcas';
+import { Tcas, TcasIntruder } from '../../traffic/TCAS';
 import { ResourceModerator } from '../../utils/resource';
 import { FSComponent, VNode } from '../FSComponent';
 import { GenericAirspaceRenderManager } from '../map/GenericAirspaceRenderManager';
@@ -65,7 +65,7 @@ export type MapSystemCustomBuilder<
   RequiredModules extends ModuleRecord = any,
   RequiredLayers extends LayerRecord = any,
   RequiredContext extends ContextRecord = any
-  > = (mapBuilder: MapSystemBuilder<RequiredModules, RequiredLayers, any, RequiredContext>, ...args: Args) => MapSystemBuilder<any, any, any, any>;
+> = (mapBuilder: MapSystemBuilder<RequiredModules, RequiredLayers, any, RequiredContext>, ...args: Args) => MapSystemBuilder<any, any, any, any>;
 
 /**
  * Retrieves the extra arguments, after the map builder, of a custom builder.
@@ -146,7 +146,7 @@ type ConditionalReturn<
   Context,
   RequiredContext,
   ReturnType
-  > = Modules extends RequiredModules ? Layers extends RequiredLayers ? Context extends RequiredContext ? ReturnType : never : never : never;
+> = Modules extends RequiredModules ? Layers extends RequiredLayers ? Context extends RequiredContext ? ReturnType : never : never : never;
 
 /** Checks if a type is exactly the `any` type. */
 type IsAny<T> = boolean extends (T extends never ? true : false) ? true : false;
@@ -193,7 +193,7 @@ export class MapSystemBuilder<
   Layers extends LayerRecord = any,
   Controllers extends ControllerRecord = any,
   Context extends ContextRecord = any,
-  > {
+> {
 
   protected static readonly RESTRICTED_CONTEXT_KEYS = new Set([
     'bus',
